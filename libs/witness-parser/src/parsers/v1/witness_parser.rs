@@ -89,7 +89,7 @@ impl WitnessesParser {
                         }
                     }
 
-                    match util::parse_date_type_from_witness(i, &buf) {
+                    match util::parse_data_type_from_witness(i, &buf) {
                         Ok(data_type) => {
                             if !das_witnesses_started {
                                 err_assert!(
@@ -125,12 +125,12 @@ impl WitnessesParser {
                         }
                         Err(WitnessParserError::UndefinedDataType {
                             index: _index,
-                            date_type: _date_type,
+                            data_type: _data_type,
                         }) => {
                             // Ignore unknown DataTypes which will make adding new DataType much easier and no need to update every contracts.
                             debug!(
                                 "witnesses[{:>2}] Ignored unknown DataType {:?} for compatible purpose.",
-                                _index, _date_type
+                                _index, _data_type
                             );
                         }
                         Err(err) => {
@@ -455,7 +455,7 @@ impl WitnessQueryable for WitnessesParser {
             }
         );
 
-        let data_type = util::parse_date_type_from_witness(index, &buf)?;
+        let data_type = util::parse_data_type_from_witness(index, &buf)?;
 
         let version = u32::from(data_entity.version());
 
@@ -497,7 +497,7 @@ impl WitnessQueryable for WitnessesParser {
             }
         );
 
-        let data_type = util::parse_date_type_from_witness(index, &buf)?;
+        let data_type = util::parse_data_type_from_witness(index, &buf)?;
         let entity = T::from_compatible_slice(&data).map_err(|_err| WitnessParserError::DecodingEntityFailed {
             index,
             data_type,

@@ -75,7 +75,7 @@ pub fn load_cell_data(index: usize, source: Source) -> Result<Vec<u8>, WitnessPa
     }
 }
 
-pub fn parse_date_type_from_witness(index: usize, buf: &[u8]) -> Result<DataType, WitnessParserError> {
+pub fn parse_data_type_from_witness(index: usize, buf: &[u8]) -> Result<DataType, WitnessParserError> {
     let data_type_in_int = u32::from_le_bytes(
         buf.get(WITNESS_HEADER_BYTES..(WITNESS_HEADER_BYTES + WITNESS_TYPE_BYTES))
             .unwrap()
@@ -85,7 +85,7 @@ pub fn parse_date_type_from_witness(index: usize, buf: &[u8]) -> Result<DataType
 
     let data_type = DataType::try_from(data_type_in_int).map_err(|_err| WitnessParserError::UndefinedDataType {
         index,
-        date_type: data_type_in_int,
+        data_type: data_type_in_int,
     })?;
 
     Ok(data_type)

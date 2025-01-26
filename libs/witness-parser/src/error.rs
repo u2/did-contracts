@@ -23,8 +23,8 @@ pub enum WitnessParserError {
     OrderError { index: usize, msg: String },
     #[error("witnesses[{index}] {msg}")]
     BasicDataStructureError { index: usize, msg: String },
-    #[error("witnesses[{index}] The DataType {date_type} is undefined.")]
-    UndefinedDataType { index: usize, date_type: u32 },
+    #[error("witnesses[{index}] The DataType {data_type} is undefined.")]
+    UndefinedDataType { index: usize, data_type: u32 },
     #[error("witnesses[{index}] The witness of {data_type} found, but the cell is missing.")]
     ConfigCellNotFound { index: usize, data_type: DataType },
     #[error("witnesses[{index}] There should be only one {data_type} .")]
